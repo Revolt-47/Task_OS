@@ -11,9 +11,9 @@
 #include <errno.h>
 #include<math.h>
 
-void et(int);
-void ep(int);
-//void mm_bench();
+//void et(int);
+//void ep(char);
+void mm_bench(int);
 
 double etime(int memory){
 
@@ -21,7 +21,7 @@ double etime(int memory){
 
 
     gettimeofday( &start, NULL );
-    et(memory);
+    //et(memory);
     gettimeofday( &end, NULL );
     timersub(&end,&start,&compute);
    // fprintf(stderr,"Hello from et\n took %d.%06d sec\n",compute.tv_sec,compute.tv_usec);
@@ -31,13 +31,12 @@ double etime(int memory){
 
 }
 
-double etime2(int size){
+double etime2(char op){
 
     struct timeval start, end;
 
-
     gettimeofday( &start, NULL );
-   // ep(size);
+   	//ep(op);
     gettimeofday( &end, NULL );
 
     double seconds = (end.tv_sec - start.tv_sec) +
@@ -46,12 +45,11 @@ double etime2(int size){
 
 }
 
-double etime3(){
+double etime3(int threads){
     struct timeval start, end;
 
-
     gettimeofday( &start, NULL );
-   // mm_bench();
+   	mm_bench(threads);
     gettimeofday( &end, NULL );
 
      double seconds = (end.tv_sec - start.tv_sec) +
@@ -63,15 +61,32 @@ double etime3(){
 
 
 int main(int argc, char*argv[]){
-	char *writeOp=argv[1];
-	int memory=atoi(argv[2]);
-	printf("%s\n",writeOp);
-	printf("%d\n",memory);
+	//char *writeOp=argv[1];
+	//char operation=' ';
+	
+	//char op=(char)writeOp;
+	//int memory=atoi(argv[2]);
+	int noThreads=atoi(argv[1]);
+	
+	//printf("%s\n",writeOp);
+	printf("%d\n",noThreads);
+	
+/*	if(!strcmp(writeOp,"-b")){*/
+/*		operation='b';*/
+/*    }*/
+/*    if(!strcmp(writeOp,"-a")){*/
+/*			operation='a';*/
+/*    	}*/
     //int* ptr;
     // Dynamically allocate memory using calloc()
     //ptr = (int*)calloc(argv[2], sizeof(int));
-    double x = etime(memory);
-    printf("%d.%06d",x);
+    
+    //double x = etime(memory);
+    //double x = etime2(operation);
+    double x = etime3(noThreads);
+    
+    //printf("%d.%06d",x);
+    printf("%f",x);
 
   
     
