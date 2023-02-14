@@ -13,18 +13,26 @@
 
 void* func(void* arg)
 {
-     
-    pthread_detach(pthread_self());
+    pthread_detach(pthread_self()); 
 }
   
-void et()
+void et(int mem)
 {
-    pthread_t ptid;
-  
-    // Creating a new thread
-    pthread_create(&ptid, NULL, &func, NULL);
-    printf("\nhello from et");
-    pthread_join(ptid, NULL);
+    pthread_t *ptid;
+	ptid=calloc(mem,sizeof(pthread_t *));  
+	
+    // Creating a new thread 
+    for(int i=0;i<mem;i++)
+    	pthread_create(&ptid[i], NULL, func, NULL);
+    printf("\nhello from et ");
+    for(int i=0;i<mem;i++)
+    	pthread_join(ptid[i], NULL);
+    printf("\n");
 }
   
- 
+
+
+
+
+
+

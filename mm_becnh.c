@@ -11,15 +11,12 @@
 #include <errno.h>
 #include<math.h>
 
-void multiplyMatrices(int first[][240],
-                      int second[][240],
-                      int result[][240],
-                      int r1, int c1, int r2, int c2) {
+void multiplyMatrices(int first[][240],int second[][240],int result[][240],int r1, int c1, int r2, int c2) {
 
    // Initializing elements of matrix mult to 0.
-   for (int i = 0; i < r1; ++i) {
-      for (int j = 0; j < c2; ++j) {
-         result[i][j] = 0;
+   for (int i = 0; i < r1; i++) {
+      for (int j = 0; j < c2; j++) {
+         result[i][j] = 0; 
       }
    }
 
@@ -34,12 +31,23 @@ void multiplyMatrices(int first[][240],
 }
 
 void mm_bench(){
-    int first[240][240];
-    int second[240][240];
-    int result[240][240];
+    int first**;
+    int second**;
+    int result**;
+    int rows=240;
+    int col=240;
+    first = calloc(rows, sizeof( int*));  //dynamic allocation of array
+    second = calloc(rows, sizeof( int*));
+    result = calloc(rows, sizeof( int*));
+	for(int i=0;i<r;i++){
+		first[i]=calloc(col,sizeof( int));
+		second[i]=calloc(col,sizeof( int));
+		result[i]=calloc(col,sizeof( int));
+	}
+		
 
-    for (int i = 0; i < 240; ++i) {
-      for (int j = 0; j < 240; ++j) {
+    for (int i = 0; i < rows; i++) {
+      for (int j = 0; j < col; j++) {
          first[i][j]=i+j;
          second[i][j]=i+j;
       }
@@ -48,7 +56,4 @@ void mm_bench(){
    multiplyMatrices(first,second,result,240,240,240,240);
 }
 
-int main(){
-    return 0;
-}
 

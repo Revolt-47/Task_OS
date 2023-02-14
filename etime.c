@@ -11,35 +11,35 @@
 #include <errno.h>
 #include<math.h>
 
-//void et();
-void ep();
+void et(int);
+void ep(int);
 //void mm_bench();
 
-double etime(){
+double etime(int memory){
 
     struct timeval start, end;
 
 
     gettimeofday( &start, NULL );
-    //et();
+    et(memory);
     gettimeofday( &end, NULL );
 
-     double seconds = (end.tv_sec - start.tv_sec);
+    double seconds = (end.tv_sec - start.tv_sec);
      
             return seconds;
 
 }
 
-double etime2(){
+double etime2(int size){
 
     struct timeval start, end;
 
 
     gettimeofday( &start, NULL );
-    ep();
+    ep(size);
     gettimeofday( &end, NULL );
 
-     double seconds = (end.tv_sec - start.tv_sec);
+    double seconds = (end.tv_sec - start.tv_sec);
 
             return seconds;
 
@@ -61,14 +61,19 @@ double etime3(){
 
 
 
-int main(){
-
+int main(int argc, char*argv[]){
+	char *writeOp=argv[1];
+	int memory=atoi(argv[2]);
+	printf("%s\n",writeOp);
+	printf("%d\n",memory);
     //int* ptr;
     // Dynamically allocate memory using calloc()
     //ptr = (int*)calloc(argv[2], sizeof(int));
-    double x = etime2();
+    double x = etime(memory);
     printf("%f",x);
 
   
     
 }
+
+
