@@ -17,15 +17,16 @@ void ep(int);
 
 double etime(int memory){
 
-    struct timeval start, end;
+    struct timeval  start, end , compute;
 
 
     gettimeofday( &start, NULL );
     et(memory);
     gettimeofday( &end, NULL );
-
-    double seconds = (end.tv_sec - start.tv_sec);
-     
+    timersub(&end,&start,&compute);
+   // fprintf(stderr,"Hello from et\n took %d.%06d sec\n",compute.tv_sec,compute.tv_usec);
+    double seconds = (end.tv_sec - start.tv_sec) +
+            1.0e-6 * (end.tv_usec - start.tv_usec);
             return seconds;
 
 }
@@ -36,11 +37,11 @@ double etime2(int size){
 
 
     gettimeofday( &start, NULL );
-    ep(size);
+   // ep(size);
     gettimeofday( &end, NULL );
 
-    double seconds = (end.tv_sec - start.tv_sec);
-
+    double seconds = (end.tv_sec - start.tv_sec) +
+            1.0e-6 * (end.tv_usec - start.tv_usec);
             return seconds;
 
 }
@@ -53,8 +54,8 @@ double etime3(){
    // mm_bench();
     gettimeofday( &end, NULL );
 
-     double seconds = (end.tv_sec - start.tv_sec);
-
+     double seconds = (end.tv_sec - start.tv_sec) +
+            1.0e-6 * (end.tv_usec - start.tv_usec);
             return seconds;
 }
 
@@ -70,7 +71,7 @@ int main(int argc, char*argv[]){
     // Dynamically allocate memory using calloc()
     //ptr = (int*)calloc(argv[2], sizeof(int));
     double x = etime(memory);
-    printf("%f",x);
+    printf("%d.%06d",x);
 
   
     
